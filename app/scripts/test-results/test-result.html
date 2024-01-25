@@ -1,0 +1,20 @@
+<div class='container'>
+    <test-info test="test"></test-info>
+
+    <div class="row form-group">
+    <span class="pull-right">
+        <input type="checkbox" ng-change=' updateTest() ' ng-model="test.checked" ng-disabled='!areAllPointsGiven()'>
+        <label>Mark as reviewed</label>
+    </span>
+    </div>
+
+    <div class="row form-group">
+	<textarea class='form-control' ng-model='test.generalComment' ng-blur=' updateTest() ' rows='15' ng-disabled="test.checked"
+              placeholder='Comment'></textarea>
+
+        <div ng-repeat='question in test.questions'>
+            <question quest='question' disabled="true" show-results='true' edit-results=' !test.checked '
+                      update-test-method='updateTest()'/>
+        </div>
+    </div>
+</div>

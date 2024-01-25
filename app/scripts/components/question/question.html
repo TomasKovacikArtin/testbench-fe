@@ -1,0 +1,66 @@
+<div class='question-wrapper'>
+    <div class='col-md-2 set-result-wrapper'>
+        <div class="input-group pull-right" ng-show=' showRatingInput() '>
+            <input type='number' min="0" max="{{question.maxPoints}}" ng-model='question.points' class='form-control'
+                   ng-blur=' updateTest() '/>
+
+            <div class="input-group-addon">/{{question.maxPoints}}</div>
+        </div>
+        <div class="right-align" ng-show=' showResults && !editResults'>
+            <span><h4>Points: {{question.points}}/{{question.maxPoints}}</h4></span>
+        </div>
+        <button ng-show=' showRatingButtons() ' class='btn btn-success' ng-click=' markAsCorrectedAnswer() '>Correct
+        </button>
+        <button ng-show=' showRatingButtons() ' class='btn btn-danger' ng-click=' markAsIncorrectedAnswer() '>Incorrect
+        </button>
+    </div>
+
+    <div class='question pre-line'>
+        {{question.text}}
+        <div ng-if=' isQuestionTextCode() '>
+            <div id='questionCode' ng-model='question.code' ui-ace=' getAceOptionQuestionCodeBlock() '></div>
+        </div>
+    </div>
+    <div class='test-answers'>
+        <div class='answers-wrapper'>
+            <div ng-show=' showOptions() '>
+                <table class='container-full'>
+                    <tr ng-repeat='answer in question.answers'>
+                        <td><i ng-show='showResults && answer.correct' class="fa fa-angle-right"></i></td>
+                        <td ng-if=' showCheckboxes() '>
+                            <input type='checkbox' ng-model='answer.marked' ng-disabled='disabled'>
+                        </td>
+                        <td ng-if=' showRadioButtons() '>
+                            <input type='radio' ng-model='answer.marked' ng-value="true"
+                                   ng-click="answerSelected($index)" ng-disabled='disabled'>
+                        </td>
+                        <td class='answer-text'
+                            ng-class="{'correct-answer': showResults && answer.marked && answer.correct, 'incorrect-answer': showResults && answer.marked && !answer.correct}">
+                            <i ng-show='showResults && answer.correct' class="fa fa-start text-success"></i> <span
+                                class='answer'>{{answer.text}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div ng-show=' isQuestionTypeFill() '>
+				<textarea ng-show=' showPlainTextAnswer() ' ng-model='question.answer.text'
+                          placeholder='Please fill the answer' class='form-control' ng-disabled='disabled'
+                          rows="10"></textarea>
+
+                <div ng-if=' showCodeFormatingAnswer()' id='answerCode' ng-model='question.answer.text'
+                     ui-ace=' getAceOption() '></div>
+            </div>
+        </div>
+    </div>
+    <div class="result-wrapper" ng-show='showResults'>
+        <i ng-show='question.points == null' class="fa fa-5x fa-question-circle text-warning"></i>
+        <i ng-show='question.points == question.maxPoints' class="fa fa-5x fa-check-circle-o text-success"></i>
+        <i ng-show='question.points == 0' class="fa fa-5x fa-times-circle-o text-danger"></i>
+        <i ng-show='question.points < question.maxPoints && question.points > 0'
+           class="fa fa-5x fa-check-circle-o text-warning"></i>
+    </div>
+    <div ng-hide="testMode" class="answers-wrapper">
+        <label> Comment </label>
+        <textarea ng-model='question.evaluatorComment'  class='form-control' placeholder="Please fill in comment ... " rows="5"  ng-blur=' updateTest() ' ng-disabled="!editResults"></textarea>
+    </div>
+</div>

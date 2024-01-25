@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class='col-md-8'>
+    <div class="col-md-3 col-sm-4 col-xs-6 list-tests" ng-repeat="template in templates" ng-show="templates.length">
+      <a ng-click="createTest(template)" class="thumbnail">
+
+        <div class="title"><span>{{template.name}}</span></div>
+        <div class="details">
+          <div>Questions: {{template.questions.length}}</div>
+          <div>Time:
+            <span ng-show="template.timeSeconds" tooltip="hh:mm">{{template.timeSeconds | secondsToHHmm }}</span>
+            <span ng-show="!template.timeSeconds">Unlimited</span>
+          </div>
+        </div>
+
+      </a>
+    </div>
+    <div ng-hide="templates.length">
+      No tests yet.
+    </div>
+  </div>
+
+  <div style="position:absolute; top: 50px; bottom: 0; right: 0; z-index:-1">
+    <img src="app/images/artinacek.png" style="max-height: 100%">
+  </div>
+
+</div>

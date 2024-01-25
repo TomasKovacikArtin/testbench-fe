@@ -1,0 +1,32 @@
+<div class='container test-wrapper'>
+    <div class='test-header'>
+        <span class='test-name'>{{test.name}}</span>
+        <span>Question {{qIndex}}/{{test.questions.length}}</span>
+        <span ng-if='test.remainingSeconds && test.timeSeconds' tooltip="Remaining time">
+            <i class='fa fa-clock-o color-primary'></i>
+            <timer ng-if='test.remainingSeconds' countdown="test.remainingSeconds" interval="1000"
+                   finish-callback='markTestAsFinished()'>
+                <span ng-class="{'text-danger': isLittleTime()}">
+                    {{hours}}:{{minutes}}:{{seconds}}
+                </span>
+            </timer>
+        </span>
+
+        <div class="pull-right">
+
+            <button class='btn btn-default' ng-click='previousQuestion()' ng-disabled="! hasPreviousQuestion()">
+                <i class='fa fa-chevron-left'></i> Previous
+            </button>
+
+            <button class='btn btn-default' ng-click='nextQuestion()' ng-disabled="! hasNextQuestion()">
+                Next <i class='fa fa-chevron-right'></i>
+            </button>
+
+            <button class='btn btn-success' ng-click='finishTest()' ng-disabled="! wasVisitedLastQuestion()">
+                Finish
+            </button>
+
+        </div>
+    </div>
+    <question quest="question" test-mode='true'></question>
+</div>

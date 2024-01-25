@@ -1,0 +1,37 @@
+<div id="login-dialog">
+    <form name="loginForm" ng-submit='loginForm.$valid && loginCandidate()' novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title">Log in as Candidate</h3>
+        </div>
+        <div id="login-form-modal-body" class="modal-body">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class='fa fa-user'></i></div>
+                    <input type="email" name="emailInput" ng-model="login.email" class="form-control input-lg has-error"
+                           id="exampleInputEmail1" placeholder="E-mail" autofocus required>
+                </div>
+                <div class='error-messages' ng-messages="loginForm.emailInput.$error"
+                     ng-show='interacted(loginForm.emailInput)'>
+                    <div ng-message="required">Email is required</div>
+                    <div ng-message="email">Email must be in correct format: xxx@xxxx.xx</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" ng-model="login.firstName" class="form-control input-lg" id="firstName"
+                               placeholder="First name">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" ng-model="login.lastName" class="form-control input-lg" id="lastName"
+                               placeholder="Last name">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="btn btn-default btn-lg" ng-click="cancel()">Close</div>
+            <button type="submit" class="btn btn-success btn-lg">Log in <i class="fa fa-sign-in"></i></button>
+        </div>
+    </form>
+</div>

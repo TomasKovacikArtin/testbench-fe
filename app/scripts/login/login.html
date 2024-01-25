@@ -1,0 +1,42 @@
+<div id="login-dialog">
+    <form name="loginForm" ng-submit='loginForm.$valid && loginUser()' novalidate>
+        <div class="modal-header">
+            <h3 class="modal-title">Log in as User</h3>
+        </div>
+        <div id="login-form-modal-body" class="modal-body">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class='fa fa-user'></i></div>
+                    <input type="email" name="emailInput" ng-model="login.email" class="form-control input-lg has-error"
+                           id="exampleInputEmail1" placeholder="E-mail" autofocus required>
+                </div>
+                <div class='error-messages' ng-messages="loginForm.emailInput.$error"
+                     ng-show='interacted(loginForm.emailInput)'>
+                    <div ng-message="required">Email is required</div>
+                    <div ng-message="email">Email must be in correct format: xxx@xxxx.xx</div>
+                </div>
+            </div>
+            <div class="form-group text-right">
+                <span ng-click="loginForm.emailInput.$valid && sendNewPassword()"
+                      ng-class="{'disabled': loginForm.emailInput.$invalid}"
+                      tooltip="If you wish to receive a new password must fill e mail">Forgot password</span>&nbsp&nbsp
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class='fa fa-key'></i></div>
+                    <input type="password" ng-model="login.password" class="form-control input-lg" name="passwordInput"
+                           id="exampleInputPassword1" placeholder="Password" ng-change="changePassword()" required>
+                </div>
+                <div class='error-messages' ng-messages="loginForm.passwordInput.$error"
+                     ng-show='interacted(loginForm.passwordInput)'>
+                    <div ng-message="required">Password is required</div>
+                </div>
+            </div>
+            </div>
+        <div class="modal-footer">
+            <div class="btn btn-default btn-lg" ng-click="cancel()">Close</div>
+            <button type="submit" class="btn btn-success btn-lg">Log in <i class="fa fa-sign-in"></i></button>
+        </div>
+    </form>
+</div>

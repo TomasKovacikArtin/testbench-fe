@@ -1,0 +1,58 @@
+<div class='page-submenu container-fluid'>
+    <div class="text-line">
+        <span ui-sref='edit-user'
+              class='fa fa-plus pull-right panel-header-item text-info'> Create user</span>
+    </div>
+</div>
+
+
+<div class="panel panel-border">
+    <div class="panel-header">
+        <div class="panel-header-label">
+            Users
+        </div>
+
+        <div class="panel-header-items">
+
+            <div class="input-group col-md-4 pull-right panel-header-item">
+                <input type='text' ng-model='search' class='form-control' placeholder='Fitering in table'/>
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-thin table-hover table-vert-middle"
+               ng-init="predicate='email'">
+            <thead>
+            <th sort-column order="'email'" by="predicate">Email</th>
+            <th>Role</th>
+            <th>Branch</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat='user in users | filter:search | orderBy:predicate:reverse'>
+                <td>
+                    {{user.email}}
+                    <span ng-show="user.firstName != null && user.lastName != null">
+                        ({{user.firstName}} {{user.lastName}})
+                    </span>
+                </td>
+                <td>{{user.roles | enumValues:"ENUM_ROLES"}}</td>
+                <td>
+                    <span ng-show="!user.branches">
+                     No branch selected
+                   </span>
+                    <span ng-show="user.branches">
+                       {{user.branches | enumValues:"ENUM_BRANCHES"}}
+                    </span>
+                </td>
+                <td>
+                    <i ng-click="deleteUser(user)" tooltip="Delete" class='fa fa-2x fa-trash text-danger pull-right'></i>
+                    <div ui-sref="edit-user({id:user.id})" tooltip="Edit" class='fa fa-edit text-info fa-2x pull-right'></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

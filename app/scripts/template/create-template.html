@@ -1,0 +1,242 @@
+<div class='container'>
+    <div class='page-header'>
+        <h3>Creating test template</h3>
+    </div>
+
+    <div class="container-fluid">
+
+        <form name='createTemplateForm'>
+            <div class="row">
+                <div class='form-group col-md-6'>
+                    <input id='templateName' ng-model='template.name' placeholder='name' class='form-control input-lg' name="templateName"
+                           ng-blur=' saveTemplate() '
+                           required>
+                </div>
+                <div class='col-md-2'>
+                    <div class="input-group">
+                        <input id='templateTime' type='time' ng-model='template.timeSeconds'
+                               placeholder='Max time' class='form-control input-lg'
+                               ng-blur=' saveTemplate() ' tooltip="If you do not specify a time, then the test will be unlimited"
+                               time-to-seconds>
+
+                        <div class="input-group-addon">hh:mm</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class='form-group col-md-6'>
+                    <label for="controller">Evaluators</Evaluators></label>
+                    <select id='controller' ng-model="template.availableControllersIds" multiple="multiple"
+                            class='form-control' name="template.availableControllersIds"
+                            ng-options='obj.id as obj.email for obj in admins' ng-blur=' saveTemplate() '
+                            required>
+                        <option value disabled selected>--- evaluator ---</option>
+                    </select>
+                 </div>
+                <div class='form-group col-md-6'>
+                    <label for="hr">HRs</label>
+                    <select id='hr' ng-model="template.availableHrsIds"
+                            class='form-control' name="template.availableHrsIds"  multiple="multiple"
+                            ng-options='obj.id as obj.email for obj in admins' ng-blur=' saveTemplate() '
+                            required>
+                        <option value disabled selected>--- HR ---</option>
+                    </select>
+
+                </div>
+            </div>
+
+        </form>
+
+
+    </div>
+    <div class="container-fluid">
+        <legend>
+            Questions
+        </legend>
+        <a role="button" class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#questionModal"
+           ng-disabled=' ! canAddedQuestion() ' ng-click=' initNewQuestion() '>Add question</a>
+        <table class="table table-striped table-thin table-hover table-vert-middle">
+            <thead>
+            <tr>
+                <th class='col-md-10'>Question</th>
+                <th class='col-md-2'></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat='q in template.questions'>
+                <td ng-click='loadQuestion(q)' data-toggle="modal"
+                    data-target="#questionModal" class='pre-line'>{{$index + 1}}. {{q.text}}
+                </td>
+                <td>
+                    <div class='btn btn-danger btn-sm pull-right' ng-click='deleteQuestion(q)'>Delete</div>
+                </td>
+            </tr>
+            <tr ng-if='template.questions == 0' class='text-center'>
+                <td colspan='2'>No questions yet</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="questionModal" class="modal fade">
+    <div id='questionModalDialog' class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Questions</h4>
+            </div>
+            <div class="modal-body">
+                <div class='container-fluid'>
+                    <div class="row">
+                        <div class='template-form col-md-6'>
+                            <div class="panel panel-border">
+                                <div class="panel-header">
+                                    Question
+                                </div>
+                                <div class="panel-body">
+                                    <div class='form-group'>
+                                        <label for='questionText'>Text</label>
+                                        <textarea id='questionText' ng-model='question.text'
+                                                  class="form-control"
+                                                  rows="3"
+                                                  required></textarea>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class='form-group col-md-4'>
+                                            <label for='maxPoints'>Points</label>
+                                            <input id='maxPoints' min='1' type='number' class="form-control"
+                                                   ng-model='question.maxPoints' required
+                                                   tooltip="Points for correct answer"/>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class='form-group col-md-5'>
+                                            <input id='codeBlock' type='checkbox' ng-model='question.codeBlock'
+                                                   ng-click=' setDefaultQuestionCodeBlockTechnology() '/>
+                                            <label for='codeBlock'>Add code block</label>
+                                        </div>
+                                        <div class='form-group col-md-7' ng-show=' isQuestionCodeBlockAdded() '>
+                                            <label for='questionCodeTechnology'>Technology</label>
+                                            <select id='questionCodeTechnology' ng-model="question.codeBlockTechnology"
+                                                    class='form-control'
+                                                    ng-options='obj.id as obj.value for obj in technologies'></select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class='form-group' ng-show=' showQuestionCodeBlock() '>
+                                        <label for='questionCode'>Source code</label>
+
+                                        <div id='questionCode' ng-model='question.code'
+                                             ui-ace="aceOptionBlockTechnology"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form name='createQuestionForm'>
+                                <div class='panel panel-border'>
+
+                                    <div class="panel-header">
+                                        Answer
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class='form-group col-md-8'>
+                                                <label for='maxPoints'>Answer type</label>
+                                                <select id='questionType' ng-model="questionDefinition"
+                                                        class='form-control'
+                                                        ng-options='obj as obj.name for obj in answerTypes'
+                                                        ng-change=' changeQuestionDefinition() ' required></select>
+                                            </div>
+                                        </div>
+                                        <div class='row'>
+                                            <div class='col-md-12'>
+
+                                                <div class='form-group' ng-show=' showAnswerInputCode() '>
+                                                    <label for='answerCode'>Prefilled answer</label>
+
+                                                    <div id='answerCode' ng-model='question.answer.text'
+                                                         ui-ace="aceOption"></div>
+                                                </div>
+
+                                                <div class='form-group' ng-show=' showAnswerInputText() '>
+                                                    <label for='answerText'>Prefilled question</label>
+                                                    <textarea id='answerText' ng-model='question.answer.text'
+                                                              class="form-control"
+                                                              rows="3"></textarea>
+                                                </div>
+
+                                                <div ng-if=' isQuestionTypeMultipleSelected() ' class='form-group'>
+                                                    <label>Options</label>
+
+                                                    <div ng-repeat='ans in question.answers'>
+                                                        <div class='form-group'>
+                                                            <div class="input-group">
+                                                                <input ng-model='ans.text' type="text"
+                                                                       class="form-control">
+
+                                                                <div class="input-group-addon"
+                                                                     ng-click=' setAnswerCorrect($index) '
+                                                                     ng-class='{bgsuccess: ans.correct}'><i
+                                                                        class='fa fa-inverse fa-check'></i>
+                                                                </div>
+                                                                <div class="input-group-addon bgdanger"
+                                                                     ng-click=' removeAnswer($index) '><i
+                                                                        class='fa fa-inverse fa-trash'></i></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class='form-group'>
+                                                        <div class="input-group">
+                                                            <input ng-model='testAnswer.text' type="text"
+                                                                   class="form-control">
+
+                                                            <div class="input-group-addon"
+                                                                 ng-click=' setAnswerCorrect() '
+                                                                 ng-class='{bgsuccess: testAnswer.correct}'><i
+                                                                    class='fa fa-check'></i></div>
+                                                            <div class="input-group-addon" ng-click=' addAnswer() '><i
+                                                                    class='fa fa-plus'></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class='col-md-6'>
+                            <div class='panel panel-border'>
+                                <div class="panel-header">Question preview</div>
+                                <div class="panel-body">
+                                    <question class='test-content' quest='question'></question>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click=' initTempProperties() '>
+                    Close
+                </button>
+                <button class='btn btn-primary pull-right' ng-click=' addQuestion() '
+                        ng-disabled=' isNotQuestionValid() '>Save and add question
+                </button>
+                <button class='btn btn-primary pull-right' ng-click=' addQuestion(true) '
+                        ng-disabled=' isNotQuestionValid() ' data-dismiss="modal"><span data-dismiss="modal">Save and close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div> 

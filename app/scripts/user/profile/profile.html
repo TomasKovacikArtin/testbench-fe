@@ -1,0 +1,80 @@
+<div class='container'>
+    <div class='page-header'>
+        <h3>User profile</h3>
+    </div>
+
+    <div class="col-md-6">
+        <form name="userProfileForm" class="col-md-12" ng-submit="updatePersonalInfo()">
+            <legend>
+                Common
+            </legend>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id='email' type="text" ng-model="user.email" class="form-control input-lg"
+                               id="email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for='firstName'>First name</label>
+                        <input id='firtName' type="text" ng-model="user.firstName" class="form-control input-lg"
+                               id="firstName">
+                    </div>
+                    <div class="col-md-6">
+                        <label for='secondName'>Last name</label>
+                        <input id='secondName' type="text" ng-model="user.lastName" class="form-control input-lg"
+                               id="lastName">
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary pull-right" ng-disabled='userProfileForm.$invalid'>Save
+            </button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <form name="userPasswordForm" class="col-md-12" ng-submit="updatePassword()" novalidate>
+            <legend>
+                Password change
+            </legend>
+            <div class="form-group">
+                <label for='password'>Current password</label>
+                <input type="password" id='password' name='passwordInput' ng-model="userForPassword.password"
+                       class='form-control input-lg' required/>
+
+                <div class='error-messages' ng-messages="userPasswordForm.passwordInput.$error"
+                     ng-show='interacted(userPasswordForm.passwordInput)'>
+                    <div ng-message="required">Password is required</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for='password'>New password</label>
+                <input type="password" id='newPassword' name='newPasswordInput' ng-model="userForPassword.newPassword"
+                       class='form-control input-lg' required/>
+
+                <div class='error-messages' ng-messages="userPasswordForm.newPasswordInput.$error"
+                     ng-show='interacted(userPasswordForm.newPasswordInput)'>
+                    <div ng-message="required">Password is required</div>
+                    <div ng-message="notSame">Passwords have to be the same</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for='password'>New password once more</label>
+                <input type="password" not-same comp-value="userForPassword.newPassword" id='newPasswordConfirm'
+                       name='newPasswordConfirmedInput' ng-model="userForPassword.newPasswordConfirmed"
+                       class='form-control input-lg' required/>
+
+                <div class='error-messages' ng-messages="userPasswordForm.newPasswordConfirmedInput.$error"
+                     ng-show='interacted(userPasswordForm.newPasswordConfirmedInput)'>
+                    <div ng-message="required">Password is required</div>
+                    <div ng-message="notSame">Passwords have to be the same</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary pull-right" ng-disabled='userPasswordForm.$invalid'>Change password
+            </button>
+        </form>
+    </div>
+</div>

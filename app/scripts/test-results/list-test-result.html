@@ -1,0 +1,95 @@
+<div class="panel panel-border">
+    <div class="panel-header">
+        <div class="panel-header-label">
+            Testy
+        </div>
+
+        <div class="panel-header-items">
+            <pagination
+                ng-model="currentPage"
+                total-items="totalElements"
+                max-size="maxSize"
+                items-per-page="itemsPerPage"
+                boundary-links="true"
+                ng-change="pageChanged()">
+            </pagination>
+            <select id='itemsPerPage' ng-model="itemsPerPage"
+                    class='form-control items-per-page input-sm' ng-options='item for item in perPage'
+                    ng-change='fetchTests()'></select>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <table class="table table-striped table-thin table-hover table-vert-middle"
+               ng-init="predicate='startTime'; reverse='true'">
+            <thead>
+            <th>Email</th>
+            <th>Candidate name</th>
+            <th sort-column order="'name'" by="predicate" reverse="reverse" sorting-changed="sortingChanged(sorting)">
+                Name
+            </th>
+            <th>Result</th>
+            <th sort-column order="'startTime'" by="predicate" reverse="reverse"
+                sorting-changed="sortingChanged(sorting)">Started
+            </th>
+            <th>Filling time</th>
+            <th sort-column order="'state'" by="predicate" reverse="reverse" sorting-changed="sortingChanged(sorting)">
+                State
+            </th>
+            <th sort-column order="'branches'" by="predicate" reverse="'false'" sorting-changed="sortingChanged(sorting)">
+                Branch
+                </th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr>
+                <td><input ng-keypress="filterList($event)" ng-model="filter.email" class="form-control input-sm" placeholder="Filtering by email"></td>
+                <td><input ng-keypress="filterList($event)" ng-model="filter.lastName" class="form-control input-sm" placeholder="Filtering by last name"></td>
+                <td><input ng-keypress="filterList($event)" ng-model="filter.testName" class="form-control input-sm" placeholder="Filtering by name of test"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input ng-keypress="filterList($event)" ng-model="filter.branch" class="form-control input-sm" placeholder="Filtering by branches"></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat='test in tests'>
+                <td>{{test.user.email}}</td>
+                <td>{{test.user.firstName}} {{test.user.lastName}}</td>
+                <td>{{test.name}}</td>
+                <td>
+                           <span ng-show="test.checked">
+                            <span>{{test.percent}}%</span>
+                            ({{test.points}}/{{test.maxPoints}})
+                        </span>
+
+                    <div ng-show="! test.checked">
+                        <i class='fa fa-clock-o' tooltip="Test čeká na vyhodnocení"> </i>
+                    </div>
+                </td>
+                <td>{{test.startTime | date:'dd.MM.yyyy HH:mm'}}</td>
+                <td>{{test.durationSeconds | secondsToHHmm}}</td>
+                <td>
+                    <test-state state='{{test.state}}'></test-state>
+                </td>
+                <td>
+                    <span ng-show="!test.user.branches">
+                         No branch selected
+                     </span>
+                    <span ng-show="test.user.branches">
+                        {{test.user.branches | enumValues:"ENUM_BRANCHES"}}
+                    </span>
+                </td>
+                <td>
+                    <i ng-click="deleteTest(test)" tooltip="Delete"
+                       class='fa fa-2x fa-trash text-danger pull-right'></i>
+                    <i ng-show="! test.checked" tooltip="Review" ui-sref="test-result({id:test.id})"
+                       class='fa fa-check-square-o text-info fa-2x pull-right'></i>
+                    <i ng-show="test.checked" tooltip="Detail" ui-sref="test-result({id:test.id})"
+                       class='fa fa-eye fa-2x text-info pull-right'></i>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    

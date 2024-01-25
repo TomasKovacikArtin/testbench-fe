@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app='testBenchApp' id="aa">
+<head>
+	<title>Testbench</title>
+	<link rel="icon" type="image/png" href="app/images/artin-logo.png" />
+	<meta charset="UTF-8">
+	<!-- bower:css -->
+	<link rel="stylesheet" href="app/libs/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="app/libs/angularjs-multiselect/isteven-multi-select.css">
+	<link rel="stylesheet" href="app/libs/bootstrap/dist/css/bootstrap.css">
+	<!-- endinject -->
+	<!-- inject:css -->
+	<link rel="stylesheet" href="app/css/main.css">
+	<!-- endinject -->
+</head>
+<body>
+	<div growl></div>
+	<div ui-view>
+		<div id="main-initialization-container">
+			<div id="main-initialization-container-loader">
+				<div class="main-initialization-spinner">
+					<div class="double-bounce1"></div>
+					<div class="double-bounce2"></div>
+				</div>
+				<br>
+			Application is loading
+			</div>
+		</div>
+	</div>
+
+	<!-- bower:js -->
+
+	<script src="app/libs/angular/angular.js"></script>
+
+	<script src="app/libs/angular-ui-router/release/angular-ui-router.js"></script>
+
+	<script src="app/libs/jquery/dist/jquery.js"></script>
+
+	<script src="app/libs/moment/moment.js"></script>
+
+	<script src="app/libs/humanize-duration/humanize-duration.js"></script>
+
+	<script src="app/libs/angular-resource/angular-resource.js"></script>
+
+	<script src="app/libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+	<script src="app/libs/lodash/lodash.js"></script>
+
+	<script src="app/libs/angular-growl/build/angular-growl.js"></script>
+
+	<script src="app/libs/angular-messages/angular-messages.js"></script>
+
+	<script src="app/libs/angularjs-multiselect/isteven-multi-select.js"></script>
+
+	<script src="app/libs/bootstrap/dist/js/bootstrap.js"></script>
+
+	<script src="app/libs/angular-ui-ace/ui-ace.js"></script>
+
+	<script src="app/libs/angular-timer/dist/angular-timer.js"></script>
+
+	<!-- endinject -->
+	<!-- inject:js -->
+	<script src="app/scripts/app.js"></script>
+	<script src="app/scripts/api/About.js"></script>
+	<script src="app/scripts/api/Email.js"></script>
+	<script src="app/scripts/api/Test.js"></script>
+	<script src="app/scripts/api/TestTemplate.js"></script>
+	<script src="app/scripts/api/User.js"></script>
+	<script src="app/scripts/filters/filter-module.js"></script>
+	<script src="app/scripts/interceptors/error-interceptor.js"></script>
+	<script src="app/scripts/interceptors/request-interceptor.js"></script>
+	<script src="app/scripts/components/directives-module.js"></script>
+	<script src="app/scripts/layout/layout-controller.js"></script>
+	<script src="app/scripts/login/login.js"></script>
+	<script src="app/scripts/template/create-template-controller.js"></script>
+	<script src="app/scripts/template/list-template-controller.js"></script>
+	<script src="app/scripts/test/test-controller.js"></script>
+	<script src="app/scripts/test/test-service.js"></script>
+	<script src="app/scripts/test-results/list-test-result-controller.js"></script>
+	<script src="app/scripts/test-results/test-result-controller.js"></script>
+	<script src="app/scripts/users/edit-user-controller.js"></script>
+	<script src="app/scripts/users/list-user-controller.js"></script>
+	<script src="app/scripts/utils/auth.js"></script>
+	<script src="app/scripts/utils/contants.js"></script>
+	<script src="app/scripts/utils/enums.js"></script>
+	<script src="app/scripts/utils/filters.js"></script>
+	<script src="app/scripts/utils/main.js"></script>
+	<script src="app/scripts/welcome/welcome-controller.js"></script>
+	<script src="app/scripts/components/back-button/back-button-directive.js"></script>
+	<script src="app/scripts/components/menu/menu-directive.js"></script>
+	<script src="app/scripts/components/not-same-validator/not-same-validator.js"></script>
+	<script src="app/scripts/components/question/question-directive.js"></script>
+	<script src="app/scripts/components/sort-column-table/sort-column-directive.js"></script>
+	<script src="app/scripts/components/test-state/test-state.js"></script>
+	<script src="app/scripts/components/test-info/test-info.js"></script>
+	<script src="app/scripts/components/time-duration/time-duration-directive.js"></script>
+	<script src="app/scripts/components/time-duration/time-to-seconds-directive.js"></script>
+	<script src="app/scripts/user/profile/profile-controller.js"></script>
+	<script src="app/scripts/user/tests/list-test-finished-controller.js"></script>
+	<script src="app/scripts/user/tests/test-finished-controller.js"></script>
+	<script src="app/scripts/utils/authentication-error/authentication-error-controller.js"></script>
+	<script src="app/scripts/utils/confirm/confirm.js"></script>
+	<script src="app/scripts/utils/warn/warn.js"></script>
+	<script src="app/libs/ace-builds/src-noconflict/ace.js"></script>
+	<!-- endinject -->
+</body>
+</html>

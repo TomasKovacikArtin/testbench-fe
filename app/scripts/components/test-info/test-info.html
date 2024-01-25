@@ -1,0 +1,33 @@
+<div class="row card test-info">
+    <ul class="list-group list-group-flush test-info-list-left">
+        <li class="list-group-item test-info-item">
+            <b>Test</b><br>
+            <small>{{test.name}}</small>
+        </li>
+        <li class="list-group-item test-info-item">
+            <b>User</b><br>
+            <small>{{getFormatUser(test.user)}}</small>
+        </li>
+        <li class="list-group-item test-info-item">
+            <b>Branch</b><br>
+            <small>
+                <span ng-show="!test.user.branches"> No branch selected </span>
+                <span ng-show="test.user.branches"> {{test.user.branches | enumValues:"ENUM_BRANCHES"}} </span>
+            </small>
+        </li>
+    </ul>
+    <ul class="list-group list-group-flush test-info-list-right">
+        <li class="list-group-item test-info-item">
+            <b>Evaluation date</b><br>
+            <small>{{getEvaluationDate(test.evaluationDate)}}</small>
+        </li>
+        <li class="list-group-item test-info-item">
+            <b>Evaluator</b><br>
+            <small>{{getFormatEvaluator(test.evaluator)}}</small>
+        </li>
+        <li class="list-group-item test-info-item">
+            <b>Test was evaluated after</b><br>
+            <small>{{diffInTime()}}</small>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,15 @@
+<div class='container'>
+	<div class="page-header">
+		<h3>Test results
+			<small>{{test.name}}</small>
+		</h3>
+	</div>
+
+	<div ng-show="test.checked == false" class="alert alert-warning">Test has not been reviewed yet</div>
+
+	<textarea class='form-control' ng-model='test.generalComment' rows='10' placeholder='Comment'
+			  disabled='true'></textarea>
+    <div ng-repeat='question in test.questions'>
+        <question quest='question' disabled="true" show-results="true"/>
+    </div>
+</div>

@@ -1,0 +1,612 @@
+@import "../libs/angular-growl/build/angular-growl.min.css";
+
+@whiteTextColor: rgb(240, 240, 240);
+@primaryColor: #f57824;
+@secondaryColor: #DFEDEF;
+@bodyBackground: rgb(251, 251, 251);
+@primaryTextColor: rgb(100, 100, 100);
+
+body {
+  color: @primaryTextColor;
+  font-size: 13px;
+  font-family: Arial;
+  background: @bodyBackground;
+}
+
+.bgsuccess {
+  background: #5cb85c;
+  border-color: #4cae4c;
+}
+
+.bgdanger {
+  background: #d9534f;
+  border-color: #d43f3a;
+}
+
+a {
+  color: @primaryColor;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.nav .active {
+  background-color: #C65206 !important;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  background:#C65206;
+}
+
+.menu {
+  position: relative;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.main-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 51px;
+  padding-top: 20px;
+  bottom: 0;
+  overflow-x: auto;
+}
+
+.menu nav.navbar .navbar-nav li.active a, .menu nav.navbar .navbar-nav li.active a:hover {
+  color: @whiteTextColor;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: #C65206;
+  color: @whiteTextColor;
+}
+
+.menu nav.navbar {
+  border-bottom: 1px solid @primaryColor;
+  //font-variant: small-caps;
+  border: 0px;
+  border-radius: 0px;
+  background-color: @primaryColor !important;
+
+  //height: 70px;
+  margin-bottom: 0px;
+  font-size: 13px;
+
+  .navbar-nav > li > a, .navbar-brand {
+    color: @whiteTextColor;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-family: "brandon-grotesque", sans-serif;
+    //font-weight: bold;
+    /* font-size: 1px; */
+    //text-transform: uppercase;
+  }
+
+  .navbar-brand {
+    text-transform: uppercase;
+    font-weight: bold
+  }
+
+}
+
+.color-primary {
+  color: @primaryColor;
+}
+
+.test-wrapper {
+  .test-name {
+    font-variant: small-caps;
+    font-size: 18px;
+  }
+
+  .test-header span {
+    font-weight: bold;
+  }
+
+  .test-header span + span {
+    margin-left: 100px;
+  }
+
+  .test-header div {
+    margin-left: 10px;
+  }
+
+  .test-header {
+    border-bottom: 1px solid #e5e5e5;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+  }
+
+  .test-header .btn + .btn {
+    margin-left: 5px;
+  }
+
+  .test-content {
+
+  }
+}
+
+.question-wrapper {
+  padding: 40px 40px;
+  border-radius: 4px;
+  background: rgb(250, 250, 250);
+  border: 1px solid #e5e5e5;
+  margin-top: 10px;
+  position: relative;
+
+  .result-wrapper {
+    position: absolute;
+    bottom: 180px;
+    right: 40px;
+    opacity: 0.8;
+  }
+
+  .set-result-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .question {
+    font-size: 18px;
+
+    #questionCode {
+      height: 350px;
+    }
+
+  }
+
+  .answers-wrapper {
+    padding: 10px 10px 10px 30px;
+
+    table {
+      border-collapse: separate;
+      border-spacing: 3px;
+
+      tr td:first-child {
+        width: 10px;
+      }
+
+      tr td:nth-child(2) {
+        width: 15px;
+      }
+
+      span[ng-click] {
+        text-decoration: none;
+        color: @primaryTextColor;
+      }
+    }
+
+    #answerCode {
+      height: 500px;
+    }
+
+    .answer-text {
+      padding: 5px;
+      margin-top: 1px;
+      border-radius: 5px;
+
+      &.correct-answer {
+        background-color: #dff0d8;
+      }
+
+      &.incorrect-answer {
+        background-color: #f2dede;
+      }
+    }
+  }
+}
+
+.template-form {
+  border-right: 1px solid #e5e5e5;
+}
+
+.ace_editor {
+  border: 1px solid #e5e5e5;
+  height: 200px;
+  width: 100%
+}
+
+.thumbnail {
+  text-align: center;
+  margin: auto;
+  // font-variant: small-caps;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.growl {
+  z-index: 10000;
+}
+
+.table {
+
+  &.table-vert-middle tbody > tr > td {
+    vertical-align: middle;
+  }
+
+  .pull-right.btn + .pull-right.btn {
+    margin-right: 5px;
+  }
+
+}
+
+*[ng-click]:hover {
+  cursor: pointer;
+}
+
+*[ui-sref]:hover {
+  cursor: pointer;
+}
+
+td[ui-sref]:hover {
+  cursor: pointer;
+}
+
+.container-full {
+  width: 100%;
+  margin: 0;
+}
+
+#questionModalDialog {
+  width: 1200px;
+}
+
+.panel-header {
+  padding: 0px 20px;
+  border-radius: 5px 5px 0px 0px;
+  font-variant: small-caps;
+  text-align: left;
+  background: rgb(245, 245, 245);
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  display: table;
+
+  .panel-header-label {
+    display: table-cell;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  .panel-header-items {
+    display: table-cell;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    font-variant: initial;
+    font-weight: normal;
+    text-align: right;
+
+    .pagination {
+      margin: 0;
+      vertical-align: middle;
+    }
+
+    .panel-header-item + .panel-header-item {
+      margin-right: 10px;
+    }
+
+  }
+}
+
+.panel-border {
+  border: 1px solid lightgray;
+}
+
+.panel {
+  border-radius: 5px;
+}
+
+.error-messages.ng-active {
+  background: maroon;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.error-messages.ng-active:after {
+  position: absolute;
+  top: -10px;
+  content: "";
+  left: 20px;
+  border-style: solid;
+  border-color: transparent transparent maroon;
+  border-width: 5px;
+}
+
+#login-dialog {
+  background: @bodyBackground;
+  border-radius: 10px;
+}
+
+#login-form-modal-body {
+  padding: 30px 15px;
+}
+
+.form-group-lg {
+  margin-bottom: 30px;
+}
+
+span[ng-click] {
+  text-decoration: underline;
+  color: #337ab7;
+}
+
+span[ng-click].disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.list-tests .thumbnail {
+  background: none;
+  color: @primaryTextColor;
+  margin-bottom: 20px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  position: relative;
+  background: @secondaryColor;
+  border: transparent;
+
+  .title {
+
+    height: 50%;
+    vertical-align: bottom;
+    right: 0;
+    left: 0;
+    position: absolute;
+
+    span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .details {
+    height: 50%;
+    position: absolute;
+    top: 50%;
+    font-size: 13px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 10px
+  }
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes change-background-animation-tempalte {
+  from {
+    background-color: #DFEDEF;
+    color: @primaryTextColor;
+  }
+  to {
+    background-color: @primaryColor;
+    color: @whiteTextColor;
+  }
+}
+
+/* Standard syntax */
+@keyframes change-background-animation-tempalte {
+  from {
+    background-color: #DFEDEF;
+    color: @primaryTextColor;
+  }
+  to {
+    background-color: @primaryColor;
+    color: @whiteTextColor;
+  }
+}
+
+.list-tests .thumbnail:hover {
+  // border: 1px solid #f76707;
+  background-color: @primaryColor;
+  animation-name: change-background-animation-tempalte;
+  animation-duration: 1s;
+  color: @whiteTextColor;
+}
+
+.ace_scrollbar.ace_scrollbar-v {
+  z-index: 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 30px;
+}
+
+.common-submenu {
+  margin-bottom: 5px;
+}
+
+.page-submenu {
+  margin-bottom: 5px;
+  height: 40px;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 20px;
+  position: relative;
+
+  .text-line {
+    position: absolute;
+    margin:auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-left: inherit;
+    padding-right: inherit;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+}
+
+#main-initialization-container {
+  background-color: @primaryColor;
+  display: table;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  #main-initialization-container-loader {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: @bodyBackground;
+  }
+
+  .main-initialization-spinner {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: auto;
+  }
+
+  .double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: @bodyBackground;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+
+  .double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+
+  @-webkit-keyframes sk-bounce {
+    0%, 100% {
+      -webkit-transform: scale(0.0)
+    }
+    50% {
+      -webkit-transform: scale(1.0)
+    }
+  }
+
+  @keyframes sk-bounce {
+    0%, 100% {
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    }
+    50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
+}
+
+.spinner-wrapper {
+  position: absolute;
+  width: 300px;
+  z-index: 10000;
+  right: 0;
+  bottom: 0;
+}
+
+.spinner {
+  width: 300px;
+  text-align: right;
+}
+
+.spinner > div {
+  width: 50px;
+  height: 50px;
+  background-color: @primaryColor;
+  border-radius: 100%;
+  display: inline-block;
+  opacity: 0.8;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0)
+  }
+  40% {
+    -webkit-transform: scale(1.0)
+  }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+.items-per-page {
+  margin: 0 0 0 20px;
+  width: 10%;
+  display: inline-block;
+}
+
+.pagination {
+  font-size: 12px;
+}
+
+.test-info-item {
+  background: #f79e63;
+}
+
+.test-info-list {
+  width: 50%;
+  color: white
+}
+
+.test-info-list-left {
+  &:extend(.test-info-list);
+  float: left;
+}
+
+.test-info-list-right {
+  &:extend(.test-info-list);
+  float: right;
+}
+
+.test-info {
+  width: 102.5%
+}
+
+.atlwdg-trigger {
+  background: #F47723 !important;
+}

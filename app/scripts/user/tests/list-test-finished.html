@@ -1,0 +1,54 @@
+<div class="panel panel-border">
+    <div class="panel-header">
+        <div class="panel-header-label">
+            Testy
+        </div>
+
+        <div class="panel-header-items">
+
+            <div class="input-group col-md-4 pull-right panel-header-item">
+                <input type='text' ng-model='search' class='form-control' placeholder='Filtering in table'/>
+                <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-thin table-hover table-vert-middle"
+               ng-init="predicate='startTime'; reverse='true'">
+            <thead>
+            <th sort-column order="'name'" by="predicate" reverse="reverse">Name</th>
+            <th ng-show="auth.hasRole('USER') || auth.hasRole('ADMIN') || auth.hasRole('SUPER_ADMIN')">Evaluation</th>
+            <th sort-column order="'startTime'" by="predicate" reverse="reverse">Started</th>
+            <th>State</th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat='test in tests | filter:search | orderBy:predicate:reverse'>
+                <td>{{test.name}}</td>
+
+                <td ng-show="auth.hasRole('USER') || auth.hasRole('ADMIN') || auth.hasRole('SUPER_ADMIN')">
+							<span ng-show="test.checked">
+								<span>{{test.percent}}%</span>
+								({{test.points}}/{{test.maxPoints}})
+							</span>
+
+                    <div ng-show="! test.checked">
+                        <i class='fa fa-clock-o' tooltip="Waiting for evaluation"> </i>
+                    </div>
+                </td>
+                <td>{{test.startTime | date:'dd.MM.yyyy HH:mm'}}</td>
+                <td>
+                    <test-state state='{{test.state}}'></test-state>
+                </td>
+                <td>
+                    <i ng-show="auth.hasRole('USER') || auth.hasRole('ADMIN') || auth.hasRole('SUPER_ADMIN')"
+                         ui-sref="user-test-finished({id:test.id})" class='fa fa-eye fa-2x text-info pull-right pull-right' tooltip="Detail">
+                    </i>
+                    <i ng-show='isInFillingState(test)' ui-sref="fill-test({id:test.id})" class='fa fa-2x fa-arrow-circle-o-right text-info pull-right' tooltip="Continue"></i>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
